@@ -15,18 +15,22 @@ if token == "":
 organisation = "my-organisation"
 bucket = "my-bucket"
 
+
+def createPoint(i: int):
+    return (
+        Point("measure")
+        .tag("source", "load-data")
+        .field("value", i)
+        .time(datetime.utcnow(), WritePrecision.NS)
+    )
+
+
 with InfluxDBClient(
     url="http://localhost:8086", token=token, org=organisation
 ) as client:
     write_api = client.write_api(write_options=SYNCHRONOUS)
 
     for i in range(10):
-        point = (
-            Point("measure")
-            .tag("source", "load-data")
-            .field("value", i)
-            .time(datetime.utcnow(), WritePrecision.NS)
-        )
-
+        point = createPoint(i)
         write_api.write(bucket, organisation, point)
         print(f"Loaded {point}")
