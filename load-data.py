@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-from datetime import datetime
+import datetime
 import os
 
 from influxdb_client import InfluxDBClient, Point, WritePrecision
@@ -21,7 +21,10 @@ def createPoint(i: int):
         Point("measure")
         .tag("source", "load-data")
         .field("value", i)
-        .time(datetime.utcnow(), WritePrecision.NS)
+        .time(
+            datetime.datetime.utcnow() + datetime.timedelta(milliseconds=i * 100),
+            WritePrecision.NS,
+        )
     )
 
 

@@ -45,3 +45,7 @@ Then install python dependencies
 And load some data into InfluxDB
 
     ./load-data.py
+
+## Explore data
+
+In the InfluxDB console use the **Data Explorer** to query and graph the data.
