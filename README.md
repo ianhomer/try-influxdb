@@ -1,0 +1,2 @@
+# try-influxdb
+Try InfluxDB
