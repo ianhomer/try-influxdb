@@ -4,6 +4,7 @@
 
     brew install influxdb
     brew install influxdb-cli
+    ulimit -n 10240
     influxd
 
 Visit <http://localhost:8086/> and set username **administrator**, password **my-secret**,
