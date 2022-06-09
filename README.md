@@ -28,15 +28,22 @@ and confirm the config is active
 
 See `~/.influxdbv2/configs` for this saved config
 
-## Load data
+## Set up access tokens
 
-Get bucket ID and set into `MY_BUCKET` variable and create write token
+Either create token with write access to all buckets
+
+    influx auth create --org my-organisation --write-buckets $MY_ORGANISATION_MY_BUCKET
+
+Or create token with write access to specific bucket. Get bucket ID and set into
+`MY_BUCKET` variable and create write token
 
     influx bucket list --name my-bucket --json | jq -r ".[0].orgID"
 
 Create token to write data and set into `INFLUX_TOKEN_MY_ORGANISATION` variable
 
-    influx auth create --org my-organisation --write-bucket $MY_ORGANISATION_MY_BUCKET
+    influx auth create --org my-organisation --write-buckets $MY_ORGANISATION_MY_BUCKET
+
+## Load data
 
 Then install python dependencies
 
