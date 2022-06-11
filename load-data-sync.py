@@ -14,11 +14,11 @@ config = Config()
 
 print("loading data into influx")
 with InfluxDBClient(
-    url="http://localhost:8086", token=config.token, org=config.organisation
+    url=config.url, token=config.token, org=config.organisation
 ) as client:
     write_api = client.write_api(write_options=SYNCHRONOUS)
 
-    for i in range(1000):
+    for i in range(config.count):
         point = helper.createPoint(i)
         timer.start()
         write_api.write(config.bucket, config.organisation, point)
