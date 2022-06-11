@@ -11,6 +11,8 @@ class Config:
 
         self._organisation = "my-organisation"
         self._bucket = "my-bucket"
+        self._count = 1000
+        self._url = "http://localhost:8086"
 
     @property
     def token(self) -> str:
@@ -23,3 +25,11 @@ class Config:
     @property
     def bucket(self) -> str:
         return self._bucket
+
+    @property
+    def url(self) -> str:
+        return self._url
+
+    @property
+    def count(self) -> int:
+        return self._count
