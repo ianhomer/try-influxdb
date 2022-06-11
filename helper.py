@@ -8,7 +8,7 @@ def createPoint(i: int):
         .tag("source", "load-data")
         .field("value", i)
         .time(
-            datetime.datetime.utcnow() + datetime.timedelta(milliseconds=i * 100),
+            datetime.datetime.utcnow() + datetime.timedelta(milliseconds=-i * 10),
             WritePrecision.MS,
         )
     )
