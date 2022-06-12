@@ -23,7 +23,7 @@ async def write(write_api, i):
 async def createConsumer(queue):
     async with InfluxDBClientAsync(
         url=config.url, token=config.token, org=config.organisation,
-        connection_pool_maxsize=10000
+        connection_pool_maxsize=50
     ) as client:
         write_api = client.write_api()
 
@@ -38,7 +38,7 @@ async def createProducer(queue):
         await queue.put(i)
         timer.prep()
         # throttle
-        if i % 1000 == 0:
+        if i % 5000 == 0:
             await asyncio.sleep(1)
 
 
@@ -56,3 +56,5 @@ async def main():
 
 
 asyncio.run(main())
+helper.showBucketInfo()
+timer.finish()
