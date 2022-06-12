@@ -57,3 +57,27 @@ And load some data into InfluxDB
 ## Explore data
 
 In the InfluxDB console use the **Data Explorer** to query and graph the data.
+
+## Monitoring
+
+    brew install telegraf
+
+
+    brew services stop telegraf
+
+Start telegraf locally to watch
+
+    telegraf config > ~/local/telegraf.conf
+    telegraf -config telegraf.conf
+
+And add
+
+```ini
+[global_tags]
+  user = "administrator"
+
+[[outputs.influxdb]]
+  urls = ["${INFLUX_URL}"]
+  skip_database_creation = ${INFLUX_SKIP_DATABASE_CREATION}
+  password = "${INFLUX_PASSWORD}"
+```
