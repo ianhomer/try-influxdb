@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from influxdb_client.client.influxdb_client_async import InfluxDBClientAsync
+
 import asyncio
 
 import helper

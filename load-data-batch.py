@@ -5,6 +5,7 @@ from influxdb_client import InfluxDBClient, WriteOptions
 from influxdb_client.client.write_api import WriteType
 
 import helper
+import time
 from timer import Timer
 from config import Config
 
@@ -16,7 +17,9 @@ with InfluxDBClient(
     url=config.url, token=config.token, org=config.organisation
 ) as client:
     write_api = client.write_api(
-        write_options=WriteOptions(write_type=WriteType.synchronous)
+        write_options=WriteOptions(
+            batch_size=10000, flush_interval=10
+        )
     )
 
     for i in range(config.count):
@@ -25,6 +28,6 @@ with InfluxDBClient(
         write_api.write(config.bucket, config.organisation, point)
         timer.stop()
 
-    write_api.flush()
+    time.sleep(5)
     write_api.close()
     timer.finish()
