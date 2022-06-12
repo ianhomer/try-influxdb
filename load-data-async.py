@@ -13,20 +13,19 @@ config = Config()
 print("loading data into influx")
 
 
-async def write(write_api, i):
+async def write(i):
     point = helper.createPoint(i)
-    timer.start()
-    await write_api.write(config.bucket, config.organisation, point)
-    timer.stop()
-
-
-async def main():
+    timer.prep()
     async with InfluxDBClientAsync(
         url=config.url, token=config.token, org=config.organisation
     ) as client:
         write_api = client.write_api()
+        await write_api.write(config.bucket, config.organisation, point)
+        timer.stop()
 
-        await asyncio.gather(*[write(write_api, i) for i in range(config.count)])
+
+async def main():
+    return await asyncio.gather(*[write(i) for i in range(config.count)])
 
 
 asyncio.run(main())

@@ -20,6 +20,6 @@ with InfluxDBClient(
 
     for i in range(config.count):
         point = helper.createPoint(i)
-        timer.start()
+        timer.prep()
         write_api.write(config.bucket, config.organisation, point)
         timer.stop()

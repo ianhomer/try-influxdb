@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 from influxdb_client import InfluxDBClient
+from influxdb_client.client.write_api import SYNCHRONOUS
 import asyncio
 
 import helper
@@ -17,15 +18,14 @@ def write(i):
     with InfluxDBClient(
         url=config.url, token=config.token, org=config.organisation
     ) as client:
-        write_api = client.write_api()
+        write_api = client.write_api(write_options=SYNCHRONOUS)
         point = helper.createPoint(i)
-        print(point)
         write_api.write(config.bucket, config.organisation, point)
         timer.stop()
 
 
 async def process(i):
-    timer.start()
+    timer.prep()
     await asyncio.to_thread(lambda: write(i))
 
 
