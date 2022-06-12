@@ -9,9 +9,11 @@ class Timer:
 
         self.started = itertools.count()
         self.completed = itertools.count()
+        self.sent = itertools.count()
         self.outputCadence = 100
         self.lastStopTime = 0
         self.lastPrepTime = 0
+        self.lastSentTime = 0
 
     def getRate(self, current, previous):
         return (
@@ -23,6 +25,13 @@ class Timer:
     @property
     def threadName(self):
         return threading.currentThread().getName()
+
+    def finish(self):
+        finishTime = round(time.time() * 1000)
+        print(
+            f"{self.threadName:12} : "
+            + f" end  : {finishTime - self.startTime}ms"
+        )
 
     def prep(self):
         i = next(self.started)
@@ -45,3 +54,14 @@ class Timer:
                 + f"done {i} : {stopTime - self.startTime}ms : rate {rate}/s"
             )
             self.lastStopTime = stopTime
+
+    def send(self):
+        i = next(self.sent)
+        if i % self.outputCadence == 0:
+            sentTime = round(time.time() * 1000)
+            rate = self.getRate(sentTime, self.lastSentTime)
+            print(
+                f"{self.threadName:12} : "
+                + f"send {i} : {sentTime - self.startTime}ms : rate {rate}/s"
+            )
+            self.lastSentTime = sentTime

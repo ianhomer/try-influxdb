@@ -15,6 +15,7 @@ print("loading data into influx")
 
 async def write(write_api, i):
     point = helper.createPoint(i)
+    timer.send()
     await write_api.write(config.bucket, config.organisation, point)
     timer.stop()
 
@@ -35,7 +36,7 @@ async def createProducer(queue):
     for i in range(config.count):
         await queue.put(i)
         timer.prep()
-        # throttlw
+        # throttle
         if i % 1000 == 0:
             await asyncio.sleep(1)
 
@@ -43,7 +44,7 @@ async def createProducer(queue):
 async def main():
     queue = asyncio.Queue()
 
-    consumers = [asyncio.create_task(createConsumer(queue)) for _ in range(100)]
+    consumers = [asyncio.create_task(createConsumer(queue)) for _ in range(500)]
     producer = asyncio.create_task(createProducer(queue))
     await producer
     print("producer complete")
