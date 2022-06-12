@@ -2,7 +2,6 @@
 
 
 from influxdb_client import InfluxDBClient, WriteOptions
-from influxdb_client.client.write_api import WriteType
 
 import helper
 import time
