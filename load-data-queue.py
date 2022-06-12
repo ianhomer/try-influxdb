@@ -15,7 +15,7 @@ print("loading data into influx")
 
 async def write(write_api, i):
     point = helper.createPoint(i)
-    timer.send()
+    # timer.send()
     await write_api.write(config.bucket, config.organisation, point)
     timer.stop()
 
@@ -23,7 +23,7 @@ async def write(write_api, i):
 async def createConsumer(queue):
     async with InfluxDBClientAsync(
         url=config.url, token=config.token, org=config.organisation,
-        connection_pool_maxsize=50
+        connection_pool_maxsize=100
     ) as client:
         write_api = client.write_api()
 
