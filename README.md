@@ -68,7 +68,7 @@ In the InfluxDB console use the **Data Explorer** to query and graph the data.
 Start telegraf locally to watch
 
     telegraf config > ~/local/telegraf.conf
-    telegraf -config telegraf.conf
+    telegraf --debug --config telegraf.conf
 
 And add
 
