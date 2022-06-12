@@ -1,14 +1,15 @@
-from influxdb_client import InfluxDBClient, Point, WritePrecision
+from influxdb_client import Point, WritePrecision
 import datetime
+
+start = datetime.datetime.now()
 
 
 def createPoint(i: int):
+    time = int((start - datetime.timedelta(milliseconds=i * 100)).timestamp() * 1_000)
+    print(time)
     return (
         Point("measure")
         .tag("source", "load-data")
-        .field("value", i)
-        .time(
-            datetime.datetime.utcnow() + datetime.timedelta(milliseconds=-i * 10),
-            WritePrecision.MS,
-        )
+        .field("value", i + 0.123)
+        .time(time, WritePrecision.MS)
     )

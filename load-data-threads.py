@@ -19,6 +19,7 @@ def write(i):
     ) as client:
         write_api = client.write_api()
         point = helper.createPoint(i)
+        print(point)
         write_api.write(config.bucket, config.organisation, point)
         timer.stop()
 
