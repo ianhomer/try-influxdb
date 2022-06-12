@@ -41,5 +41,5 @@ async def main():
 
 
 asyncio.run(main())
-helper.showBucketInfo()
 timer.finish()
+helper.showBucketInfo()

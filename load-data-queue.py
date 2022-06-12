@@ -38,7 +38,7 @@ async def createProducer(queue):
         await queue.put(i)
         timer.prep()
         # throttle
-        if i % 5000 == 0:
+        if i % 10000 == 0:
             await asyncio.sleep(1)
 
 
@@ -54,7 +54,6 @@ async def main():
     for consumer in consumers:
         consumer.cancel()
 
-
 asyncio.run(main())
-helper.showBucketInfo()
 timer.finish()
+helper.showBucketInfo()

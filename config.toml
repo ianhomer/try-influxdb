@@ -2,4 +2,9 @@
 # query-queue-size = 2048
 storage-wal-max-concurrent-writes =  500
 # log-level = "debug"
-
+metrics-disabled = true
+pprof-disabled = true
+query-queue-size = 20
+storage-wal-fsync-delay = 3
+# transient environment
+# store = "memory"
