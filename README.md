@@ -58,6 +58,10 @@ And load some data into InfluxDB
 
 In the InfluxDB console use the **Data Explorer** to query and graph the data.
 
+## Config
+
+See <http://localhost:8086/api/v2/config>
+
 ## Monitoring
 
     brew install telegraf

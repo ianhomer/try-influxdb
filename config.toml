@@ -1,0 +1,5 @@
+# http.max-concurrent-write-limit = 1
+# query-queue-size = 2048
+storage-wal-max-concurrent-writes =  200
+# log-level = "debug"
+
