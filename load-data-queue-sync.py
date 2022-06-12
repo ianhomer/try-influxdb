@@ -41,7 +41,7 @@ async def createProducer(queue):
         await queue.put(i)
         timer.prep()
         # throttle
-        if i % 1000 == 0:
+        if i % 10000 == 0:
             await asyncio.sleep(1)
 
 
