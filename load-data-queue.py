@@ -22,7 +22,8 @@ async def write(write_api, i):
 
 async def createConsumer(queue):
     async with InfluxDBClientAsync(
-        url=config.url, token=config.token, org=config.organisation
+        url=config.url, token=config.token, org=config.organisation,
+        connection_pool_maxsize=10000
     ) as client:
         write_api = client.write_api()
 
