@@ -11,7 +11,7 @@ class Config:
 
         self._organisation = "my-organisation"
         self._bucket = "my-bucket"
-        self._count = 1000
+        self._count = 100000
         self._url = "http://localhost:8086"
 
     @property
