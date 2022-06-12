@@ -37,14 +37,14 @@ async def createProducer(queue):
         await queue.put(i)
         timer.prep()
         # throttle
-        if i % 1000 == 0:
+        if i % 2000 == 0:
             await asyncio.sleep(1)
 
 
 async def main():
     queue = asyncio.Queue()
 
-    consumers = [asyncio.create_task(createConsumer(queue)) for _ in range(500)]
+    consumers = [asyncio.create_task(createConsumer(queue)) for _ in range(100)]
     producer = asyncio.create_task(createProducer(queue))
     await producer
     print("producer complete")
